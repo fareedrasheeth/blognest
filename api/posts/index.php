@@ -34,8 +34,10 @@ if ($method === 'GET') {
             $post['is_owner'] = isPostOwner($post['user_id']);
             
             // XSS sanitization for title and author
-            $post['title']  = sanitizeOutput($post['title']);
-            $post['author'] = sanitizeOutput($post['author']);
+            $post['title']                = sanitizeOutput($post['title']);
+            $post['author']               = sanitizeOutput($post['author']);
+            $post['created_at_formatted'] = date('M j, Y, g:i a', strtotime($post['created_at']));
+            $post['updated_at_formatted'] = date('M j, Y, g:i a', strtotime($post['updated_at']));
             // Note: content will be rendered as Markdown on client side with XSS protection
 
             sendJsonResponse(true, 'Post retrieved successfully.', ['post' => $post]);
@@ -53,12 +55,14 @@ if ($method === 'GET') {
             $currentUserId = isLoggedIn() ? $_SESSION['user_id'] : null;
 
             foreach ($posts as &$p) {
-                $p['is_owner'] = ($currentUserId !== null && (int)$p['user_id'] === (int)$currentUserId);
-                $p['title']    = sanitizeOutput($p['title']);
-                $p['author']   = sanitizeOutput($p['author']);
+                $p['is_owner']                = ($currentUserId !== null && (int)$p['user_id'] === (int)$currentUserId);
+                $p['title']                   = sanitizeOutput($p['title']);
+                $p['author']                  = sanitizeOutput($p['author']);
+                $p['created_at_formatted']    = date('M j, Y, g:i a', strtotime($p['created_at']));
+                $p['updated_at_formatted']    = date('M j, Y, g:i a', strtotime($p['updated_at']));
                 // Create short text excerpt for listing
-                $plainContent  = strip_tags($p['content']);
-                $p['excerpt']   = mb_substr($plainContent, 0, 150) . (mb_strlen($plainContent) > 150 ? '...' : '');
+                $plainContent                 = strip_tags($p['content']);
+                $p['excerpt']                  = mb_substr($plainContent, 0, 150) . (mb_strlen($plainContent) > 150 ? '...' : '');
             }
 
             sendJsonResponse(true, 'Posts retrieved successfully.', ['posts' => $posts]);
