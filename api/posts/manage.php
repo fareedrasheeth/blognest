@@ -60,7 +60,7 @@ try {
             sendJsonResponse(false, 'Post title must not exceed 255 characters.', [], 400);
         }
 
-        $updateStmt = $db->prepare("UPDATE blogPost SET title = :title, content = :content, updated_at = NOW() WHERE id = :id");
+        $updateStmt = $db->prepare("UPDATE blogPost SET title = :title, content = :content, updated_at = CURRENT_TIMESTAMP WHERE id = :id");
         $updateStmt->execute([
             ':title'   => $title,
             ':content' => $content,

@@ -1,0 +1,3 @@
+config/*.sqlite
+*.sqlite
+.DS_Store

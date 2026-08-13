@@ -1,4 +1,4 @@
-# Project Prompt: Blog Application (IN2120 Web Programming Assignment)
+# Project prompt: Blog Application (IN2120 Web Programming Assignment)
 
 ## Objective
 Build a full-stack **Blog Application** with:

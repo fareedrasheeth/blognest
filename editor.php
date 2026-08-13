@@ -21,7 +21,6 @@ if ($isEdit) {
         if (!$fetched) {
             $error = "Blog post not found.";
         } else if (!isPostOwner($fetched['user_id'])) {
-            // SERVER-SIDE OWNERSHIP CHECK FOR EDIT PAGE
             $error = "Unauthorized: You can only edit your own blog posts.";
         } else {
             $postData = $fetched;
@@ -31,37 +30,35 @@ if ($isEdit) {
     }
 }
 
-$pageTitle = $isEdit ? "Edit Post" : "Create New Post";
+$pageTitle = $isEdit ? "Edit Article" : "Write Article";
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<div class="editor-container">
-  <div style="margin-bottom: 20px;">
-    <a href="<?php echo $isEdit ? 'post.php?id=' . $postId : 'index.php'; ?>" class="btn btn-secondary btn-sm">← Cancel &amp; Return</a>
+<div class="container-narrow">
+  <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+    <a href="<?php echo $isEdit ? 'post.php?id=' . $postId : 'index.php'; ?>" class="btn btn-secondary btn-sm">← Back to Articles</a>
+    <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-muted);">
+      <?php echo $isEdit ? 'Editing Existing Article' : 'Drafting New Article'; ?>
+    </span>
   </div>
 
   <?php if ($error): ?>
-    <div class="auth-box text-center">
-      <h2 style="margin-bottom: 12px;">🚫 Access Restricted</h2>
-      <p class="text-muted" style="margin-bottom: 20px;"><?php echo sanitizeOutput($error); ?></p>
+    <div class="auth-box text-center" style="max-width: 500px; margin: 40px auto;">
+      <h2 class="auth-title">🚫 Access Restricted</h2>
+      <p style="color: var(--text-muted); margin-bottom: 20px;"><?php echo sanitizeOutput($error); ?></p>
       <a href="index.php" class="btn btn-primary">Return to Home</a>
     </div>
   <?php else: ?>
-    <div style="background: var(--bg-card); backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-lg);">
-      <h1 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;">
-        <span><?php echo $isEdit ? '✏️ Edit Article' : '✍️ Create New Article'; ?></span>
-      </h1>
-
+    <div class="editor-workspace">
       <div id="editorAlertBox"></div>
 
       <form id="postEditorForm" data-mode="<?php echo $isEdit ? 'edit' : 'create'; ?>" data-post-id="<?php echo $postId; ?>">
         <div class="form-group">
-          <label for="title" class="form-label">Article Title</label>
-          <input type="text" id="title" name="title" class="form-control" placeholder="Enter a descriptive title..." value="<?php echo sanitizeOutput($postData['title']); ?>" required maxlength="255">
+          <input type="text" id="title" name="title" class="form-control editor-title-input" placeholder="Article Title..." value="<?php echo sanitizeOutput($postData['title']); ?>" required maxlength="255">
         </div>
 
         <div class="form-group">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
             <label class="form-label" style="margin-bottom: 0;">Article Content (Markdown Supported)</label>
             <div class="editor-tabs">
               <button type="button" class="editor-tab active" id="writeTabBtn">Write</button>
@@ -70,7 +67,7 @@ require_once __DIR__ . '/includes/header.php';
           </div>
 
           <div id="writePane">
-            <textarea id="content" name="content" class="form-control" style="min-height: 320px; font-family: var(--font-code);" placeholder="Write your post here in Markdown format...&#10;&#10;# Heading 1&#10;**Bold text**, *Italics*, [Link](https://example.com)&#10;&#10;```javascript&#10;console.log('Hello BlogNest!');&#10;```" required><?php echo htmlspecialchars($postData['content'], ENT_QUOTES, 'UTF-8'); ?></textarea>
+            <textarea id="content" name="content" class="form-control" style="min-height: 380px; font-family: var(--font-primary); font-size: 1.05rem; line-height: 1.7;" placeholder="Write your story here using Markdown...&#10;&#10;## Subheading&#10;Share your thoughts with generous spacing and clear formatting.&#10;&#10;* Highlight points with italics or **bold text**." required><?php echo htmlspecialchars($postData['content'], ENT_QUOTES, 'UTF-8'); ?></textarea>
           </div>
 
           <div id="previewPane" class="hidden">
@@ -78,9 +75,9 @@ require_once __DIR__ . '/includes/header.php';
           </div>
         </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+        <div style="display: flex; justify-content: flex-end; gap: 14px; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border-color);">
           <a href="<?php echo $isEdit ? 'post.php?id=' . $postId : 'index.php'; ?>" class="btn btn-secondary">Cancel</a>
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary btn-lg">
             <?php echo $isEdit ? 'Save Changes' : 'Publish Article'; ?>
           </button>
         </div>

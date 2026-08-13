@@ -9,8 +9,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?php echo isset($pageTitle) ? sanitizeOutput($pageTitle) . ' - BlogNest' : 'BlogNest - Next-Gen Publishing Platform'; ?></title>
-  <meta name="description" content="A fast, hostable full-stack blog application built with PHP, MySQL, and modern Vanilla JS.">
+  <title><?php echo isset($pageTitle) ? sanitizeOutput($pageTitle) . ' - BlogNest' : 'BlogNest - Digital Publication Platform'; ?></title>
+  <meta name="description" content="BlogNest is a modern, hostable full-stack publishing platform for creators and storytellers.">
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- Marked.js for client-side Markdown rendering -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -20,8 +20,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.php" class="logo-brand">
-        <div class="logo-icon">B</div>
-        <span>BlogNest</span>
+        <img src="assets/blognest logo.png" alt="BlogNest Logo" class="logo-img">
+        <span class="logo-text">BlogNest</span>
       </a>
       
       <nav>
@@ -29,10 +29,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
           <li><a href="index.php" class="nav-link <?php echo $currentPage === 'index.php' ? 'active' : ''; ?>">Home</a></li>
           
           <?php if (isLoggedIn()): ?>
-            <li><a href="editor.php" class="nav-link <?php echo $currentPage === 'editor.php' ? 'active' : ''; ?>">+ Create Post</a></li>
+            <li><a href="editor.php" class="nav-link <?php echo $currentPage === 'editor.php' ? 'active' : ''; ?>">+ Create Article</a></li>
             <li>
               <div class="user-badge">
-                <span>👤 <?php echo sanitizeOutput($currentUser['username']); ?></span>
+                <span class="user-avatar-circle"><?php echo strtoupper(substr($currentUser['username'], 0, 1)); ?></span>
+                <span><?php echo sanitizeOutput($currentUser['username']); ?></span>
               </div>
             </li>
             <li><a href="api/auth/logout.php" class="btn btn-secondary btn-sm" id="logoutBtn">Logout</a></li>

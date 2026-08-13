@@ -11,12 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Live Markdown Preview Tabs ---
     if (previewTabBtn && writeTabBtn && contentInput) {
-        previewTabBtn.addEventListener('click', () => {
-            writeTabBtn.classList.remove('active');
-            previewTabBtn.classList.add('active');
-            writePane.classList.add('hidden');
-            previewPane.classList.remove('hidden');
-
+        const updatePreview = () => {
             const rawText = contentInput.value.trim();
             if (!rawText) {
                 previewBox.innerHTML = '<p class="text-muted" style="font-style: italic;">Nothing to preview yet. Start typing your blog content in Markdown!</p>';
@@ -25,6 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 previewBox.textContent = rawText;
             }
+        };
+
+        previewTabBtn.addEventListener('click', () => {
+            writeTabBtn.classList.remove('active');
+            previewTabBtn.classList.add('active');
+            writePane.classList.add('hidden');
+            previewPane.classList.remove('hidden');
+            updatePreview();
         });
 
         writeTabBtn.addEventListener('click', () => {
@@ -32,6 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
             writeTabBtn.classList.add('active');
             previewPane.classList.add('hidden');
             writePane.classList.remove('hidden');
+        });
+
+        contentInput.addEventListener('input', () => {
+            if (previewPane && !previewPane.classList.contains('hidden')) {
+                updatePreview();
+            }
         });
     }
 
