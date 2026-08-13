@@ -32,13 +32,6 @@ if ($postId > 0) {
 
 $pageTitle = $post ? $post['title'] : "Post Not Found";
 require_once __DIR__ . '/includes/header.php';
-
-$coverImages = [
-    "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop"
-];
-$coverImg = $coverImages[$postId % count($coverImages)];
 ?>
 
 <div class="container-narrow">
@@ -86,8 +79,6 @@ $coverImg = $coverImages[$postId % count($coverImages)];
           </div>
         <?php endif; ?>
       </div>
-
-      <img src="<?php echo $coverImg; ?>" alt="Article Cover" class="single-post-cover">
 
       <!-- Markdown content container -->
       <div class="post-content-body" id="postBody" data-markdown="<?php echo htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8'); ?>">

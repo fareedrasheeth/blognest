@@ -20,16 +20,6 @@ try {
     $dbError = true;
 }
 
-// Curated high quality editorial cover image placeholders
-$coverImages = [
-    "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1200&auto=format&fit=crop"
-];
-
 $categories = ["Technology", "Design", "Culture", "Business", "Engineering", "Ideas"];
 ?>
 
@@ -40,7 +30,7 @@ $categories = ["Technology", "Design", "Culture", "Business", "Engineering", "Id
       <h1 class="hero-headline">Stories that inspire. <span>Ideas that ignite growth.</span></h1>
     </div>
     <div class="hero-intro">
-      <p class="hero-subtitle">Discover perspectives, technology insights, and long-form articles published by independent writers and creators on BlogNest.</p>
+      <p class="hero-subtitle">Discover perspectives, technology insights, and articles published by independent writers on BlogNest.</p>
       <div class="hero-cta-group">
         <?php if (!isLoggedIn()): ?>
           <a href="register.php" class="btn btn-primary">Start Writing Today</a>
@@ -55,16 +45,12 @@ $categories = ["Technology", "Design", "Culture", "Business", "Engineering", "Id
   <?php if (!empty($posts)): ?>
     <?php 
       $featured = $posts[0];
-      $featuredImage = $coverImages[0];
       $plainText = strip_tags($featured['content']);
-      $featuredExcerpt = mb_substr($plainText, 0, 220) . (mb_strlen($plainText) > 220 ? '...' : '');
+      $featuredExcerpt = mb_substr($plainText, 0, 240) . (mb_strlen($plainText) > 240 ? '...' : '');
       $featuredDate = date('M j, Y', strtotime($featured['created_at']));
     ?>
-    <!-- Large Featured Article Cover -->
-    <div class="hero-featured-card">
-      <div class="hero-featured-img-wrap">
-        <img src="<?php echo $featuredImage; ?>" alt="Featured Cover" class="hero-featured-img">
-      </div>
+    <!-- Featured Article Card (Text-First Editorial) -->
+    <div class="hero-featured-card text-only">
       <div class="hero-featured-content">
         <span class="category-badge">Featured Story</span>
         <h2 class="hero-featured-title">
@@ -117,17 +103,11 @@ $categories = ["Technology", "Design", "Culture", "Business", "Engineering", "Id
         <?php 
           $isOwner = isPostOwner($post['user_id']);
           $plainText = strip_tags($post['content']);
-          $excerpt = mb_substr($plainText, 0, 140) . (mb_strlen($plainText) > 140 ? '...' : '');
+          $excerpt = mb_substr($plainText, 0, 160) . (mb_strlen($plainText) > 160 ? '...' : '');
           $postDate = date('M j, Y', strtotime($post['created_at']));
-          $imgUrl = $coverImages[$idx % count($coverImages)];
           $cat = $categories[$idx % count($categories)];
         ?>
         <article class="post-card">
-          <div class="post-card-img-wrap">
-            <a href="post.php?id=<?php echo $post['id']; ?>">
-              <img src="<?php echo $imgUrl; ?>" alt="Article Cover" class="post-card-img">
-            </a>
-          </div>
           <div class="post-card-body">
             <span class="category-badge"><?php echo $cat; ?></span>
             <h3 class="post-card-title">

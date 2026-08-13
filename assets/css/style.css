@@ -309,6 +309,10 @@ header.site-header {
   transition: var(--transition);
 }
 
+.hero-featured-card.text-only {
+  display: block;
+}
+
 .hero-featured-card:hover {
   border-color: var(--border-hover);
   box-shadow: var(--shadow-lg);
