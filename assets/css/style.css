@@ -120,7 +120,7 @@ header.site-header {
 }
 
 .logo-img {
-  height: 38px;
+  height: 52px;
   width: auto;
   object-fit: contain;
 }
@@ -732,7 +732,7 @@ header.site-header {
 }
 
 .auth-logo-img {
-  height: 48px;
+  height: 64px;
   width: auto;
   margin-bottom: 16px;
 }
@@ -754,7 +754,7 @@ header.site-header {
 footer.site-footer {
   background: var(--bg-card);
   border-top: 1px solid var(--border-color);
-  padding: 48px 0 36px 0;
+  padding: 24px 0;
   margin-top: auto;
 }
 
