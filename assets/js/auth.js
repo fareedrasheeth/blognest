@@ -1,6 +1,18 @@
 // assets/js/auth.js - Authentication Form Handlers (Login & Register)
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.password-toggle').forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+            const passwordField = toggle.closest('.password-field');
+            const passwordInput = passwordField.querySelector('input');
+            const isVisible = passwordInput.type === 'text';
+
+            passwordInput.type = isVisible ? 'password' : 'text';
+            toggle.setAttribute('aria-label', isVisible ? 'Show password' : 'Hide password');
+            toggle.setAttribute('aria-pressed', String(!isVisible));
+        });
+    });
+
     // --- Registration Form Handler ---
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {

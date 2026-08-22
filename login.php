@@ -27,7 +27,10 @@ if (isLoggedIn()) {
 
       <div class="form-group">
         <label for="password" class="form-label">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+        <div class="password-field">
+          <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+          <button type="button" class="password-toggle" aria-label="Show password" aria-pressed="false">&#128065;</button>
+        </div>
       </div>
 
       <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 12px; padding: 12px 24px;">Sign In to Account</button>
