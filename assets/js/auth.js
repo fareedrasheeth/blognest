@@ -12,15 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const username = document.getElementById('username').value.trim();
             const email    = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
 
             // Client-side Validation
-            if (!username || !email || !password) {
+            if (!username || !email || !password || !confirmPassword) {
                 showAlert(alertBoxId, 'Please fill in all fields.');
                 return;
             }
 
             if (password.length < 6) {
                 showAlert(alertBoxId, 'Password must be at least 6 characters long.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showAlert(alertBoxId, 'Passwords do not match.');
                 return;
             }
 
@@ -31,16 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch('api/auth/register.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, email, password })
+                    body: JSON.stringify({ username, email, password, confirmPassword })
                 });
 
                 const data = await response.json();
 
                 if (data.success) {
-                    showAlert(alertBoxId, data.message, 'success');
-                    setTimeout(() => {
-                        window.location.href = 'index.php';
-                    }, 1000);
+                    window.location.href = 'index.php';
                 } else {
                     showAlert(alertBoxId, data.message || 'Registration failed.');
                     submitBtn.disabled = false;
@@ -83,10 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
 
                 if (data.success) {
-                    showAlert(alertBoxId, 'Login successful! Redirecting...', 'success');
-                    setTimeout(() => {
-                        window.location.href = 'index.php';
-                    }, 800);
+                    window.location.href = 'index.php';
                 } else {
                     showAlert(alertBoxId, data.message || 'Invalid credentials.');
                     submitBtn.disabled = false;

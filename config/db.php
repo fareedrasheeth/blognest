@@ -1,6 +1,5 @@
 <?php
 // config/db.php - Database Connection Configuration using PDO
-
 define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
 define('DB_NAME', getenv('DB_NAME') ?: 'blognest_db');
 define('DB_USER', getenv('DB_USER') ?: 'root');

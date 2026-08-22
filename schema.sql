@@ -1,8 +1,5 @@
 -- BlogNest MySQL Database Schema Definition
 
-CREATE DATABASE IF NOT EXISTS blognest_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE blognest_db;
-
 -- User Table
 CREATE TABLE IF NOT EXISTS user (
     id INT AUTO_INCREMENT PRIMARY KEY,

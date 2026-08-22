@@ -12,7 +12,7 @@ if (isLoggedIn()) {
 <div class="auth-wrapper">
   <div class="auth-box">
     <div class="auth-logo-header">
-      <img src="assets/blognest logo.png" alt="BlogNest Logo" class="auth-logo-img">
+      <img src="/sources/textlogo.png?v=2" alt="BlogNest" class="auth-logo-img" width="240" height="96" fetchpriority="high" decoding="async">
       <h1 class="auth-title">Welcome Back</h1>
       <p class="auth-subtitle">Sign in to your BlogNest account to manage and publish stories.</p>
     </div>

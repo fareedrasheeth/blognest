@@ -12,7 +12,7 @@ if (isLoggedIn()) {
 <div class="auth-wrapper">
   <div class="auth-box">
     <div class="auth-logo-header">
-      <img src="assets/blognest logo.png" alt="BlogNest Logo" class="auth-logo-img">
+      <img src="/sources/textlogo.png?v=2" alt="BlogNest" class="auth-logo-img" width="240" height="96" fetchpriority="high" decoding="async">
       <h1 class="auth-title">Join BlogNest</h1>
       <p class="auth-subtitle">Create your free author account to write and share stories.</p>
     </div>
@@ -33,6 +33,11 @@ if (isLoggedIn()) {
       <div class="form-group">
         <label for="password" class="form-label">Password</label>
         <input type="password" id="password" name="password" class="form-control" placeholder="At least 6 characters" required minlength="6" autocomplete="new-password">
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Re-enter your password" required minlength="6" autocomplete="new-password">
       </div>
 
       <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 12px; padding: 12px 24px;">Register Author Account</button>

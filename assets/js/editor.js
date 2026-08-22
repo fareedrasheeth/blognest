@@ -83,11 +83,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
 
                 if (data.success) {
-                    showAlert(alertBoxId, data.message, 'success');
-                    setTimeout(() => {
-                        const targetId = isEditMode ? postId : (data.data?.post_id || '');
-                        window.location.href = targetId ? `post.php?id=${targetId}` : 'index.php';
-                    }, 1000);
+                    if (isEditMode) {
+                        showAlert(alertBoxId, 'Article updated successfully.', 'success');
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Save Changes';
+                    } else {
+                        showAlert(alertBoxId, data.message, 'success');
+                        setTimeout(() => {
+                            const targetId = data.data?.post_id || '';
+                            window.location.href = targetId ? `post.php?id=${targetId}` : 'index.php';
+                        }, 1000);
+                    }
                 } else {
                     showAlert(alertBoxId, data.message || 'Failed to save post.');
                     submitBtn.disabled = false;

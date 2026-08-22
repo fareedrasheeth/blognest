@@ -16,9 +16,10 @@ $input = json_decode(file_get_contents('php://input'), true) ?? $_POST;
 $username = trim($input['username'] ?? '');
 $email    = trim($input['email'] ?? '');
 $password = $input['password'] ?? '';
+$confirmPassword = $input['confirmPassword'] ?? $input['confirm_password'] ?? '';
 
 // Basic Server-side Validation
-if (empty($username) || empty($email) || empty($password)) {
+if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
     sendJsonResponse(false, 'Please fill in all required fields.', [], 400);
 }
 
@@ -32,6 +33,10 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 if (strlen($password) < 6) {
     sendJsonResponse(false, 'Password must be at least 6 characters long.', [], 400);
+}
+
+if ($password !== $confirmPassword) {
+    sendJsonResponse(false, 'Passwords do not match.', [], 400);
 }
 
 $db = getDBConnection();

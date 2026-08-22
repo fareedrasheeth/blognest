@@ -11,6 +11,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo isset($pageTitle) ? sanitizeOutput($pageTitle) . ' - BlogNest' : 'BlogNest - Digital Publication Platform'; ?></title>
   <meta name="description" content="BlogNest is a modern, hostable full-stack publishing platform for creators and storytellers.">
+  <link rel="preload" as="image" href="/sources/textlogo.png?v=2">
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- Marked.js for client-side Markdown rendering -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -20,8 +21,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.php" class="logo-brand">
-        <img src="assets/blognest logo.png" alt="BlogNest Logo" class="logo-img">
-        <span class="logo-text">BlogNest</span>
+        <img src="/sources/textlogo.png?v=2" alt="BlogNest" class="logo-img" width="240" height="82" fetchpriority="high" decoding="async">
       </a>
       
       <nav>

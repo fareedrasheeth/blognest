@@ -1,3 +1,4 @@
 config/*.sqlite
 *.sqlite
 .DS_Store
+BlogNest_Full_Workflow_Guide.pdf
